@@ -26,6 +26,8 @@ void do_add(int x) {
     for (int i = 0 ; i < 100; ++i) {
         if (share_memory->now >= 1000) {
             pthread_mutex_unlock(&share_memory->mutex);
+            sleep(1);
+            pthread_cond_signal(&share_memory->cond);
             exit(0);
         }
         share_memory->now++;
@@ -52,7 +54,6 @@ int main () {
        perror("share_memory");
         exit(1);
     }
-
     share_memory->now = 0;
     share_memory->sum = 0;
     pthread_mutexattr_t attr;
@@ -82,5 +83,6 @@ int main () {
     }
     printf("share_memory->sum = %d\n",share_memory->sum);
     shmdt(share_memory);
+    shmctl(shmid,IPC_RMID,NULL);
     return 0;
 }
