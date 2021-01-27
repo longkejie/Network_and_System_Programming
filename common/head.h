@@ -10,6 +10,14 @@
 #include<unistd.h>
 #include<fcntl.h>
 #include<pthread.h>
+#include<sys/socket.h>
+
+  #include <netinet/in.h>
+         #include <arpa/inet.h>
+
+
+#include"tcp_client.h"
+#include"tcp_server.h"
 #include<sys/wait.h>
 #include<sys/file.h>
 #include<sys/ipc.h>
