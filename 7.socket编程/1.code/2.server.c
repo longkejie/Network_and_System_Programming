@@ -24,7 +24,7 @@ int main (int argc, char **argv) {
             perror("accept");
             exit(1);
         }
-        printf("Something is online");
+        printf("Something is online\n");
         pid_t pid;
         if ((pid = fork()) < 0) {
             exit(1);
