@@ -11,10 +11,8 @@
 #include<fcntl.h>
 #include<pthread.h>
 #include<sys/socket.h>
-
-  #include <netinet/in.h>
-         #include <arpa/inet.h>
-
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include"tcp_client.h"
 #include"tcp_server.h"
@@ -30,4 +28,7 @@
 #include<sys/ioctl.h>
 #include<sys/time.h>
 #include "common.h"
+#include<sys/epoll.h>
+#include<sys/types.h>
+
 #endif

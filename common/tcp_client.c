@@ -21,9 +21,5 @@ int socket_connect(char *ip, int port) {
     if (connect(sockfd, (struct sockaddr *)&server,sizeof(server)) < 0) {
         return -1;
     }
-
     return sockfd;
 }
-
-
-
