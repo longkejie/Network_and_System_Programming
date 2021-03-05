@@ -11,4 +11,7 @@
 int make_nonblock(int);
 
 int make_block(int);
+
+int recv_str_nonblock(int sockfd, char *buff, long size, int timeout);
+
 #endif

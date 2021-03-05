@@ -22,3 +22,22 @@ int make_block(int fd) {
     }
     return fcntl(fd,F_SETFL,(flag & ~O_NONBLOCK) );
 }
+
+
+int recv_str_nonblock(int sockfd, char *buff, long size, int timeout) {
+    fd_set rdfds;
+    struct timeval tv;
+    FD_ZERO(&rdfds);
+    FD_SET(sockfd, &rdfds);
+    tv.tv_sec = 0;
+    tv.tv_usec = timeout;
+    int ret = select(sockfd + 1, &rdfds, NULL, NULL, &tv);
+    if (ret <= 0) {
+        return -1;
+    }
+    int rsize = recv(sockfd, buff, size, 0);
+    if (rsize <= 0) {
+        return -1;
+    }
+    return 0;
+}
