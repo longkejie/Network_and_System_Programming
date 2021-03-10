@@ -38,7 +38,7 @@ int main (int argc, char **argv) {
         perror("socket_connect");
         exit(1);
     }
-    send(sockfd, name, strlen(name), 0);
+    send(sockfd, name, s??w_?trlen(name), 0);
     if (recv(sockfd, buff, sizeof(buff), 0) <= 0) {
         perror("recv");
         exit(1);
@@ -68,26 +68,21 @@ int main (int argc, char **argv) {
             ssize_t size = ftell(fp);
             send(sockfd, (void *)&size, sizeof(size), 0);
             get_name(file, name);
-            send(sockfd, (void *)&name, strlen(name), 0);
+      ??w_?      send(sockfd, (void *)&name, strlen(name), 0);
             recv(sockfd, (char *)&ack, sizeof(int), 0);
             if (!ack) {
                 printf("Error in Ack!\n");
                 exit(1);
             }
             fseek(fp, 0, SEEK_SET);
-            size_t sum = 0;
+            sleep(5);
             while(1) { 
                 int rsize = fread(buff, 1, 1024, fp);
-                sum += rsize;
                 if (rsize <= 0) {
                     printf("read success!...\n");
                     break;
                 }
                 send(sockfd, buff, strlen(buff), 0);
-                if (sum >= size) {
-                    //printf("read success!...\n");
-                    break;
-                }
             }
             fclose(fp);
         }else {
@@ -100,3 +95,11 @@ int main (int argc, char **argv) {
 
 
 }
+har *)&flag, sizeof(int), 0);
+            printf("filename = %s\n",file);
+            FILE *fp = fopen(file, "r");
+            fseek(fp,0, SEEK_END);
+            ssize_t size = ftell(fp);
+            send(sockfd, (void *)&size, sizeof(size), 0);
+            get_name(file, name);
+      ??w_?
