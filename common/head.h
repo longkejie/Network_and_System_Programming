@@ -30,5 +30,6 @@
 #include "common.h"
 #include<sys/epoll.h>
 #include<sys/types.h>
+#include<dirent.h>
 
 #endif

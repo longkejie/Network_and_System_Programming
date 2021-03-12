@@ -8,7 +8,7 @@
 #include "head.h"
 #include "cmd.h"
 
-int sockfd;
+int sockfd, data_listen, data_sock;
 void logout(int signum) {
     close(sockfd);
     printf("Bye bye\n");
@@ -54,7 +54,31 @@ int main (int argc, char **argv) {
         //r
         if (strlen(cmd) == 1 && cmd[0] == 'r') {
             flag |= RECV;
+            int ack = 0;
             send(sockfd, (char *)&flag, sizeof(int), 0);
+            if ((data_listen = socket_create(port)) < 0) {
+                perror("socket_create");
+                exit(1);
+            }
+            while (1) {
+                //recv ack
+                recv(sockfd, (void *)&ack, sizeof(int), 0);
+                if (ack == 1) {
+                    if ((data_sock = accept(data_listen, NULL, NULL)) < 0) {
+                        perror("accept");
+                        exit(1);
+                    }
+
+                }
+                //if ack == 1
+                //accept
+                //Recv
+                //close
+                //if ack == 0
+                //break
+            }
+            //close data connection
+            //close listen socket
             printf("Here Recv!\n");
         } else if (cmd[0] == 's' && cmd[1] == ' ') {
             flag |= SEND;
@@ -66,6 +90,7 @@ int main (int argc, char **argv) {
             FILE *fp = fopen(file, "r");
             fseek(fp,0, SEEK_END);
             ssize_t size = ftell(fp);
+            printf("%ld\n",size);
             send(sockfd, (void *)&size, sizeof(size), 0);
             get_name(file, name);
             send(sockfd, (void *)&name, strlen(name), 0);
@@ -83,7 +108,7 @@ int main (int argc, char **argv) {
                     printf("read success!...\n");
                     break;
                 }
-                send(sockfd, buff, strlen(buff), 0);
+                send(sockfd, buff, rsize, 0);
                 if (sum >= size) {
                     //printf("read success!...\n");
                     break;

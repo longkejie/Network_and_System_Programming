@@ -212,18 +212,3 @@ SEE ALSO
        or available locally via: info '(coreutils) ls invocation'
 
 GNU coreutils 8.28                                               January 2018                                                            LS(1)
-lors  com‐
-       mand to set it.
-
-   Exit status:
-       0      if OK,
-
-       1      if minor problems (e.g., cannot access subdirectory),
-
-       2      if serious trouble (e.g., cannot access command-line argument).
-
-AUTHOR
-       Written by Richard M. Stallman and David MacKenzie.
-
-REPORTING BUGS
-       GNU coreutils online
