@@ -15,12 +15,13 @@ void logout(int signum) {
 }
 
 int get_name(char *path, char *name) {
-    char * ptr = strrchr(path, '/');
+    char * ptr = strrchr(path, '/'); //指向path最后一个'/'.
     if (ptr == NULL) {
         strcpy(name, path);
         return 0;
     }
     strcpy(name, ptr + 1);
+    return 0;
 }
 
 int main (int argc, char **argv) {

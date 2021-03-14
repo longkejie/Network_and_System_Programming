@@ -13,7 +13,6 @@ int socket_connect(char *ip, int port) {
     if (( sockfd = socket(AF_INET,SOCK_STREAM, 0)) < 0) {
         return -1;
     }
-
     struct sockaddr_in server;
     server.sin_family = AF_INET;
     server.sin_port = htons(port);
