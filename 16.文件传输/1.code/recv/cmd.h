@@ -10,10 +10,4 @@
 #define SEND 0X1
 #define RECV 0X2
 #define NORMAL 0X4
-
-struct file_ack {
-    int ack;
-    char name[50];
-};
-
 #endif

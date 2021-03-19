@@ -10,83 +10,19 @@
 
 #define MAX_EVENTS 10
 #define MAX_CLIENTS 100
-int port;
 
 struct Client {
     char name[20];
     int fd;
     int online;
 };
-int send_one_file(int fd, char *name) {
-    struct sockaddr_in cli;
-    socklen_t len = sizeof(cli);
-    getpeername(fd, (struct sockaddr *)&cli, &len);
-    int fd_t;
 
-    char name_t[512] = {0};
-    int data = socket_connect(inet_ntoa(cli.sin_addr), 9003);
-    if (data <= 0) {
-        perror("socket_connect");
-        exit(1);
-    }
-    sprintf(name_t, "./data/%s", name);
-    if ((fd_t = open(name_t, O_RDONLY)) < 0) {
-        perror("open");
-        exit(1);
-    }
-    flock(fd_t, LOCK_EX);
-    while (1) {
-        char buffer[1024] = {0};
-        int num_read = read(fd_t, buffer, sizeof(buffer));
-        if (send(data, buffer, num_read, 0) < 0) {
-            perror("send");
-            exit(1);
-        }
-        if (num_read == 0) {
-            break;
-        } 
-    }
-    
-    close(data);
-    close(fd_t);
-
-    return 0;
-}
 
 struct epoll_event ev, events[MAX_EVENTS];
 int nfds, epollfd;
 
-int send_file(int fd) {
-    struct dirent *dir;
-    DIR *dirp = opendir("./data");
-    struct file_ack ack;
-    memset(&ack, 0, sizeof(ack));
-    if (dirp == NULL) {
-        perror("opendir");
-        exit(1);
-    }
-
-    while ((dir = readdir(dirp)) != NULL) {
-        //send ack 1
-        if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, "..")) {
-            continue;
-        }
-        ack.ack = 1;
-        strcpy(ack.name, dir->d_name);
-        send(fd, (void *)&ack, sizeof(ack), 0);
-        send_one_file(fd, dir->d_name);
-        //connect to data connection
-        //close connection
-    }
-    // send ack 0
-    ack.ack = 0;
-    send(fd, (void *)&ack, sizeof(ack), 0);
-    return 0;
-}
-
-
 int main (int argc, char **argv) {
-    int server_listen, sockfd;
+    int server_listen, sockfd, port;
     if (argc != 2) {
         fprintf(stderr, "Usage : %s port!\n",argv[0]);
         exit(1);
@@ -169,7 +105,7 @@ int main (int argc, char **argv) {
                         recv(sockfd, name, sizeof(name), 0);
                         send(sockfd, (char *)&ack, sizeof(int), 0);
                         printf("filename = %s\n", name);
-                        sprintf(filepath, "./data/%s_%s", users[sockfd].name, name);
+                        sprintf(filepath, "./data/%s",name);
                         FILE *fp = fopen(filepath, "w");
                         if (fp == NULL) {
                             perror("fopen()");
@@ -191,7 +127,6 @@ int main (int argc, char **argv) {
                         fclose(fp);
                     }else if (flag & RECV) {
                         printf("Client want recv data...\n");
-                        send_file(sockfd);
                     }else if (flag & NORMAL){
                         recv(sockfd, buff, sizeof(buff), 0);
                         printf("<%s> : %s\n", users[sockfd].name, buff);
@@ -202,3 +137,5 @@ int main (int argc, char **argv) {
         } 
     }
 }
+(1);
+                   

@@ -1,2 +1,3 @@
-gcc 1.client.c -I common/ common/tcp_client.c common/tcp_server.c.c -o client 
-gcc 2.server.c -I common/ common/tcp_server.c common/common.c -o server
+gcc 1.client.c -I common/ common/tcp_client.c common/tcp_server.c -o client 
+gcc 2.server.c -I common/ common/tcp_server.c common/tcp_client.c common/common.c -o server
+

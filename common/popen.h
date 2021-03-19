@@ -1,11 +1,12 @@
 /*************************************************************************
-	> File Name: tcp_client.h
+	> File Name: popen.h
 	> Author: longkejie
 	> Mail:1721248012@qq.com 
-	> Created Time: Tue 26 Jan 2021 08:45:51 PM CST
+	> Created Time: Tue 16 Mar 2021 07:55:20 PM CST
  ************************************************************************/
 
-#ifndef _TCP_CLIENT_H
-#define _TCP_CLIENT_H
-int socket_connect(char *ip, int port);
+#ifndef _POPEN_H
+#define _POPEN_H
+FILE *my_popen(const char *cmd, const char *type);
+int my_pclose(FILE *fp);
 #endif
