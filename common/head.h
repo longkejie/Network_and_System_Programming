@@ -9,6 +9,7 @@
 #define _HEAD_H
 #include<unistd.h>
 #include<fcntl.h>
+#include<error.h>
 #include<pthread.h>
 #include<sys/socket.h>
 #include<netinet/in.h>

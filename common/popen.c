@@ -15,7 +15,7 @@ FILE *my_popen(const char *cmd, const char *type) {
     FILE *fp;
     pid_t pid;
     if ((type[0] != 'r' && type[0] != 'w') || (type[1] != '\0')) {
-       // errno = EINVAL;
+        //errno = EINVAL;
         return NULL;
     }
     if (childpid == NULL) {
@@ -72,7 +72,7 @@ int my_pclose(FILE *fp) {
     fd = fileno(fp);
     pid_t pid = childpid[fd];
     if (pid == 0) {
-     //   errno = EINVAL;
+        //errno = EINVAL;
         return -1;
     }
     fflush(fp);
