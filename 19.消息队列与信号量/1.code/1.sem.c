@@ -19,21 +19,19 @@ union semun {
 
 
 int create_sem() {
-    key_t key = ftok(".", 2021);
-    int sem_id;
-    if ((sem_id = semget(key, 1, IPC_CREAT |0666)) < 0) {
-        perror("semget");
+    key_t key = ftok(".",2021);
+    int semid;
+    if ((semid = semget(key, 1, IPC_CREAT | 0666)) < 0) {
         return -1;
     }
-
-    return sem_id;
+    return semid;
 }
 
 
 int init_sem(int sem_id) {
     union semun arg;
     arg.val = VALUE;
-    semctl(sem_id, 0, SETVAL, arg);
+    return semctl(sem_id, 0, SETVAL, arg);
 }
 
 int sem_P(int sem_id) {
@@ -73,11 +71,11 @@ int main(int argc, char **argv) {
         }
     }
     int cnt = 0;
-    if (1) {
+    while (1) {
         sem_P(sem_id);
         cnt++;
         sem_V(sem_id);
         printf("cnt = %d\n", cnt);
+        sleep(5);
     }
-    while(1);
 }

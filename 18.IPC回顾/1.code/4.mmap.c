@@ -34,11 +34,11 @@ main(int argc, char *argv[])
    pa_offset = offset & ~(sysconf(_SC_PAGE_SIZE) - 1);
        /* offset for mmap() must be page aligned */
    printf("%ld\n",pa_offset);
-   if (offset >= sb.st_size) {
+    if (offset >= sb.st_size) {
        fprintf(stderr, "offset is past end of file\n");
        exit(EXIT_FAILURE);
    }
-
+   
    if (argc == 4) {
        length = atoi(argv[3]);
        if (offset + length > sb.st_size)
@@ -51,11 +51,9 @@ main(int argc, char *argv[])
 
    addr = mmap(NULL, length + offset - pa_offset, PROT_READ,
                MAP_PRIVATE, fd, pa_offset);
-   if (addr == MAP_FAILED)
-
-
-
-       handle_error("mmap");
+    
+    if (addr == MAP_FAILED)
+    handle_error("mmap");
 
    s = write(STDOUT_FILENO, addr + offset - pa_offset, length);
    if (s != length) {

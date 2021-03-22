@@ -45,6 +45,7 @@ int main (int argc, char **argv) {
         while (1) {
             if ((!strlen(share_memory->msg))) {
                 pthread_mutex_lock(&share_memory->mutex);
+                break;
             }
         }
         printf("Sending : %s...\n",msg);

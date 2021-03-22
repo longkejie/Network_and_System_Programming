@@ -20,9 +20,10 @@ struct Num {
 struct Num *share_memory;
 
 void do_add(int x) {
+    printf("%d : %p\n", x, &share_memory->now);
     while (1) {
-    pthread_mutex_lock(&share_memory->mutex);
-    pthread_cond_wait(&share_memory->cond,&share_memory->mutex);
+        pthread_mutex_lock(&share_memory->mutex);
+        pthread_cond_wait(&share_memory->cond,&share_memory->mutex);
     for (int i = 0 ; i < 100; ++i) {
         if (share_memory->now >= 1000) {
             pthread_mutex_unlock(&share_memory->mutex);
@@ -64,6 +65,7 @@ int main () {
     pthread_condattr_init(&c_attr);
     pthread_condattr_setpshared(&c_attr,1);
     pthread_cond_init(&share_memory->cond,&c_attr);
+    printf("0 : %p\n",&share_memory->now);
     for (int i = 1; i <= INS; ++i) {
         if ((pid = fork()) < 0) {
             perror("fork");

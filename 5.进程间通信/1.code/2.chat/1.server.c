@@ -36,7 +36,6 @@ int main () {
     
     while(1) {
         pthread_mutex_lock(&share_memory -> mutex);
-
         printf("Server Get the Mutex!\n");
         pthread_cond_wait(&share_memory->cond, &share_memory->mutex);
         printf("Server got the cond signal!\n");
