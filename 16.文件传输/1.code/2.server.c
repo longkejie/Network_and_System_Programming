@@ -22,7 +22,6 @@ int send_one_file(int fd, char *name) {
     socklen_t len = sizeof(cli);
     getpeername(fd, (struct sockaddr *)&cli, &len);
     int fd_t;
-
     char name_t[512] = {0};
     int data = socket_connect(inet_ntoa(cli.sin_addr), 9003);
     if (data <= 0) {
@@ -46,10 +45,8 @@ int send_one_file(int fd, char *name) {
             break;
         } 
     }
-    
     close(data);
     close(fd_t);
-
     return 0;
 }
 

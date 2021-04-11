@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Msg	common/chat.h	/^struct Msg {$/;"	s
+VALUE	1.sem.c	10;"	d	file:
+_CHAT_H	common/chat.h	9;"	d
+_COMMON_H	common/common.h	9;"	d
+_HEAD_H	common/head.h	9;"	d
+_POPEN_H	common/popen.h	9;"	d
+_TCP_CLIENT_H	common/tcp_client.h	9;"	d
+_TCP_SERVER_H	common/tcp_server.h	9;"	d
+_THREAD_POOL_H	common/thread_pool.h	9;"	d
+_buf	1.sem.c	/^    struct seminfo  *_buf;  \/* Buffer for IPC_INFO$/;"	m	union:semun	typeref:struct:semun::seminfo	file:
+array	1.sem.c	/^    unsigned short  *array;  \/* Array for GETALL, SETALL *\/$/;"	m	union:semun	file:
+buf	1.sem.c	/^    struct semid_ds *buf;    \/* Buffer for IPC_STAT, IPC_SET *\/$/;"	m	union:semun	typeref:struct:semun::semid_ds	file:
+childpid	common/popen.c	/^static pid_t *childpid = NULL;$/;"	v	file:
+cond	common/chat.h	/^    pthread_cond_t cond;$/;"	m	struct:Msg
+cond	common/thread_pool.h	/^    pthread_cond_t cond;$/;"	m	struct:task_queue
+create_sem	1.sem.c	/^int create_sem() {$/;"	f
+data	common/thread_pool.h	/^    char **data;$/;"	m	struct:task_queue
+get_msg	2.msg.c	/^       get_msg(int qid, int msgtype)$/;"	f	file:
+head	common/thread_pool.h	/^    int head;$/;"	m	struct:task_queue
+init_sem	1.sem.c	/^int init_sem(int sem_id) {$/;"	f
+main	1.sem.c	/^int main(int argc, char **argv) {$/;"	f
+main	2.msg.c	/^       main(int argc, char *argv[])$/;"	f
+make_block	common/common.c	/^int make_block(int fd) {$/;"	f
+make_nonblock	common/common.c	/^int make_nonblock(int fd) {$/;"	f
+maxsize	common/popen.c	/^static int maxsize = 0;$/;"	v	file:
+msg	common/chat.h	/^    char msg[1024];$/;"	m	struct:Msg
+msgbuf	2.msg.c	/^       struct msgbuf {$/;"	s	file:
+mtext	2.msg.c	/^           char mtext[80];$/;"	m	struct:msgbuf	file:
+mtype	2.msg.c	/^           long mtype;$/;"	m	struct:msgbuf	file:
+mutex	common/chat.h	/^    pthread_mutex_t mutex;$/;"	m	struct:Msg
+mutex	common/thread_pool.h	/^    pthread_mutex_t mutex;$/;"	m	struct:task_queue
+my_pclose	common/popen.c	/^int my_pclose(FILE *fp) {$/;"	f
+my_popen	common/popen.c	/^FILE *my_popen(const char *cmd, const char *type) {    $/;"	f
+name	common/chat.h	/^    char name[20];$/;"	m	struct:Msg
+recv_str_nonblock	common/common.c	/^int recv_str_nonblock(int sockfd, char *buff, long size, int timeout) {$/;"	f
+sem_P	1.sem.c	/^int sem_P(int sem_id) {$/;"	f
+sem_V	1.sem.c	/^int sem_V(int sem_id) {$/;"	f
+semun	1.sem.c	/^union semun {$/;"	u	file:
+send_msg	2.msg.c	/^       send_msg(int qid, int msgtype)$/;"	f	file:
+size	common/thread_pool.h	/^    int size;$/;"	m	struct:task_queue
+socket_connect	common/tcp_client.c	/^int socket_connect(char *ip, int port) {$/;"	f
+socket_create	common/tcp_server.c	/^int socket_create(int port) {$/;"	f
+tail	common/thread_pool.h	/^    int tail;$/;"	m	struct:task_queue
+task_queue	common/thread_pool.h	/^struct task_queue {$/;"	s
+total	common/thread_pool.h	/^    int total;$/;"	m	struct:task_queue
+usage	2.msg.c	/^       usage(char *prog_name, char *msg)$/;"	f	file:
+val	1.sem.c	/^    int val;    \/* Value for SETVAL *\/$/;"	m	union:semun	file:
